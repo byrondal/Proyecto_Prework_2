@@ -1,7 +1,87 @@
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 
+@font-face {
+  font-family: incosolata;
+  src: url(./assets/fonts/Inconsolata-VariableFont_wdth\,wght.ttf);
+}
 
+.header_info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  background-color: rgb(34, 34, 34);
+  color: azure;
+  height: 2rem;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  padding: 1rem;
+}
 
+.header_main {
+  display: flex;
+  flex-direction: column;
+  height: 8rem;
+
+}
+
+.header_first {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: gray;
+  margin-left: -5rem;
+}
+
+.header_first >div >ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+}
+
+.header_first >div >ul >li >a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.logo >a >img {
+  height: 8rem;
+  margin-top: 1rem;
+  margin-left: -7rem;
+  
+}
+
+.header_second >ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 1rem;
+  background-color: #c46161;
+  height: 3rem;
+  align-items: center;
+}
+
+.header_second >ul >li >a {
+  text-decoration: none;
+  color: black;
+  margin-left: 2rem;
+  font-weight: bold;
+}
+
+.menu_user {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 
 
