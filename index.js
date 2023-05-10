@@ -1,6 +1,6 @@
 
 
-
+//Datos de los productos
 const products = [
   {
     name: 'Back It Up Onesie',
@@ -213,6 +213,7 @@ const products = [
     url: 'https://www.nike.com/es/t/air-vestido-de-manga-larga-con-estampado-vjqVSD/DV8064-010',
   },
 ];
+
 
 
 
