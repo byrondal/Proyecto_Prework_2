@@ -214,8 +214,41 @@ const products = [
   },
 ];
 
+//Primer paso, creo las dos secciones para los filtros y los productos
+
+const productsContainer = document.createElement('section');
+productsContainer.className = 'products';
+const mainContainer = document.querySelector('main');
+mainContainer.appendChild(productsContainer);
+const productsFilter = document.createElement('section');
+productsFilter.className = 'filters';
+mainContainer.appendChild(productsFilter);
 
 
+
+
+
+//Segundo paso recoger la información de los productos para pintarlos.
+
+const drawProducts = (products) => {
+  products.forEach(product => {
+
+
+    const div$$ = document.createElement('div');
+    const divImage$$ = document.createElement('div');
+    const img$$ = document.createElement('img');
+    const divText$$ = document.createElement('div');
+    const brand$$ = document.createElement('h3');
+    const description$$ = document.createElement('h4');
+    const price$$ = document.createElement('p');
+    const buttonArticle$$ = document.createElement('button');
+
+    // le doy contenido a cada elemento de la carta de producto
+
+
+
+  });
+}
 
 
 
