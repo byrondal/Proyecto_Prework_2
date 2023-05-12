@@ -3,7 +3,7 @@
 //Datos de los productos
 const products = [
   {
-    name: 'Back It Up Onesie',
+    name: 'Back It Up Onesie vestido',
     seller: 'Free People',
     price: 98,
     stars: 4.4,
@@ -17,7 +17,7 @@ const products = [
     url: 'https://www.freepeople.com/fpmovement/shop/back-it-up-onesie/?color=040&source=CATEGORYPRODUCTTRAY&type=REGULAR&quantity=1',
   },
   {
-    name: 'Rulu High-Rise Jogger',
+    name: 'Rulu High-Rise Pantalón',
     seller: 'Lululemon',
     price: 108,
     stars: 4,
@@ -31,7 +31,7 @@ const products = [
     url: 'https://shop.lululemon.com/p/womens-joggers/Ready-to-Rulu-High-Rise-Jogger-2/_/prod11330007?color=46634',
   },
   {
-    name: 'Nike Metcon 8',
+    name: 'Nike Metcon 8 zapatilla',
     seller: 'Nike',
     price: 139.99,
     stars: 4,
@@ -45,7 +45,7 @@ const products = [
     url: 'https://www.nike.com/es/t/metcon-8-zapatillas-de-entrenamiento-lFNllk/DO9328-003',
   },
   {
-    name: 'Nike Dri-Fit',
+    name: 'Nike Dri-Fit camiseta',
     seller: 'Nike',
     price: 69.99,
     stars: 0,
@@ -59,7 +59,7 @@ const products = [
     url: 'https://www.nike.com/es/t/dri-fit-adv-aps-camiseta-deportiva-de-manga-corta-engineered-GDkwXH/DX6954-371',
   },
   {
-    name: 'Adidas Marimekko',
+    name: 'Adidas Marimekko Top',
     seller: 'Adidas',
     price: 60,
     stars: 3.3,
@@ -143,7 +143,7 @@ const products = [
     url: 'https://www.adidas.es/pantalon-7-8-training-yoga-designed-for-training-/HT4376.html',
   },
   {
-    name: 'Nike Invincible 3',
+    name: 'Nike Invincible 3 zapatilla',
     seller: 'Nike',
     price: 189.99,
     stars: 4.1,
@@ -157,7 +157,7 @@ const products = [
     url: 'https://www.nike.com/es/t/invincible-3-zapatillas-de-running-asfalto-jg0td1/DR2615-400',
   },
   {
-    name: 'On Cloudmonster',
+    name: 'On Cloudmonster zapatilla',
     seller: 'On',
     price: 170,
     stars: 5,
@@ -171,7 +171,7 @@ const products = [
     url: 'https://www.freepeople.com/fpmovement/shop/on-cloudmonster-sneakers/?category=socks-sneakers&color=010&type=REGULAR&quantity=1',
   },
   {
-    name: 'Nike Sportswear Tech',
+    name: 'Nike Sportswear Tech sudadera',
     seller: 'Nike',
     price: 129.99,
     stars: 0,
@@ -199,7 +199,7 @@ const products = [
     url: 'https://www.nike.com/es/t/pro-leggings-de-entrenamiento-de-talle-medio-con-estampado-y-longitud-completa-7qTNpf/DX0080-657',
   },
   {
-    name: 'Nike Air Dress',
+    name: 'Nike Air vestido',
     seller: 'Nike',
     price: 47.97,
     stars: 3.7,
@@ -214,25 +214,16 @@ const products = [
   },
 ];
 
-//Primer paso, creo las dos secciones para los filtros y los productos
-
-const productsContainer = document.createElement('section');
-productsContainer.className = 'products';
-const mainContainer = document.querySelector('main');
-mainContainer.appendChild(productsContainer);
-const productsFilter = document.createElement('section');
-productsFilter.className = 'filters';
-mainContainer.appendChild(productsFilter);
-
-
-
-
-
 //Segundo paso recoger la información de los productos para pintarlos.
 
 const drawProducts = (products) => {
-  products.forEach(product => {
+  const productsContainer = document.querySelector('#products');
+  productsContainer.innerHTML = "";
 
+
+  for (let i = 0; i < products.length; i++) {
+
+    const product = products[i];
 
     const div$$ = document.createElement('div');
     const divImage$$ = document.createElement('div');
@@ -242,13 +233,50 @@ const drawProducts = (products) => {
     const description$$ = document.createElement('h4');
     const price$$ = document.createElement('p');
     const buttonArticle$$ = document.createElement('button');
+    const urlButtonArticles$$ = document.createElement('a');
 
     // le doy contenido a cada elemento de la carta de producto
 
+    img$$.src = product.image;
+    brand$$.textContent = product.seller;
+    description$$.textContent = product.name;
+    price$$.textContent = `${product.price} €`;
+    urlButtonArticles$$.textContent = 'Ver artículo';
+    div$$.className = 'container';
+    divImage$$.className = 'img_container';
+    divText$$.className = 'text_container';
+    urlButtonArticles$$.href = product.url;
+    urlButtonArticles$$.rel = 'noopener';
+    urlButtonArticles$$.target = '_blank';
 
 
-  });
-}
+    //Insertamos los elementos en html
+    productsContainer.appendChild(div$$);
+    div$$.appendChild(divImage$$);
+    divImage$$.appendChild(img$$);
+    div$$.appendChild(divText$$);
+    divText$$.appendChild(brand$$);
+    divText$$.appendChild(description$$);
+    divText$$.appendChild(price$$);
+    div$$.appendChild(buttonArticle$$);
+    buttonArticle$$.appendChild(urlButtonArticles$$);
+
+
+  };
+
+};
+
+drawProducts(products);
+
+//función buscar que va a recibir el evento
+
+const search = (e) => {
+  const productsFiltered = products.filter((product) =>
+    product.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
+  );
+
+  drawProducts(productsFiltered);
+};
 
 
 
