@@ -25,7 +25,7 @@ const products = [
     color: 'gris',
     category: 'Jogger',
     season: 'primavera',
-    sport: ['Training', 'Running'],
+    sport: 'Training',
     gender: 'Mujer',
     image: 'https://images.lululemon.com/is/image/lululemon/LW5EKLS_046634_1?wid=1080&op_usm=0.5,2,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
     url: 'https://shop.lululemon.com/p/womens-joggers/Ready-to-Rulu-High-Rise-Jogger-2/_/prod11330007?color=46634',
@@ -53,7 +53,7 @@ const products = [
     color: 'verde',
     category: 'Camisetas',
     season: 'verano',
-    sport: ['Training', 'Running'],
+    sport: 'Training',
     gender: 'Hombre',
     image: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/08d2f3fb-3e19-4eb1-bcd7-7d3aaded83a1/dri-fit-adv-aps-camiseta-deportiva-de-manga-corta-engineered-GDkwXH.png',
     url: 'https://www.nike.com/es/t/dri-fit-adv-aps-camiseta-deportiva-de-manga-corta-engineered-GDkwXH/DX6954-371',
@@ -67,7 +67,7 @@ const products = [
     color: ['negro', 'blanco'],
     category: 'Tops',
     season: 'verano',
-    sport: ['Training', 'Running'],
+    sport: 'Running',
     gender: 'Mujer',
     image: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/07c935d7b66b490bad67af6500d41188_9366/Sujetador_adidas_x_Marimekko_Running_Pocket_Marron_HR8171_21_model.jpg',
     url: 'https://www.adidas.es/sujetador-adidas-x-marimekko-running-pocket/HR8171.html',
@@ -81,7 +81,7 @@ const products = [
     color: ['negro', 'blanco'],
     category: 'Mallas',
     season: 'verano',
-    sport: ['Training', 'Yoga'],
+    sport: 'Yoga',
     gender: 'Mujer',
     image: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/50b24a50261f422bb5faaf740107a4cd_9366/Mallas_7-8_adidas_X_Marimekko_Optime_Training_Negro_HR8179_21_model.jpg',
     url: 'https://www.adidas.es/mallas-7-8-adidas-x-marimekko-optime-training/HR8179.html',
@@ -109,7 +109,7 @@ const products = [
     color: 'negro',
     category: 'Shorts',
     season: 'verano',
-    sport: ['Training', 'Running'],
+    sport: 'Running',
     gender: 'Hombre',
     image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/523557/01/mod01/fnd/EEA/fmt/png/Shorts-PUMAxALEXTOUSSAINT-para-hombre',
     url: 'https://eu.puma.com/es/es/pd/shorts-puma%C2%A0x%C2%A0alex%C2%A0toussaint-para-hombre/523557.html?dwvar_523557_color=01&dwvar_523557_size=0140',
@@ -244,6 +244,7 @@ const drawProducts = (products) => {
     urlButtonArticles$$.textContent = 'Ver artículo';
     div$$.className = 'container';
     divImage$$.className = 'img_container';
+    img$$.className = "img";
     divText$$.className = 'text_container';
     urlButtonArticles$$.href = product.url;
     urlButtonArticles$$.rel = 'noopener';
@@ -266,17 +267,130 @@ const drawProducts = (products) => {
 
 };
 
+
+
+
+
+const divContainerFilter$$ = document.querySelector('#filters');
+const cleanFiltersButton$$ = document.createElement('button');
+cleanFiltersButton$$.className = 'clean_button';
+cleanFiltersButton$$.textContent = 'Limpiar filtros';
+const divBrand$$ = document.createElement('div');
+divBrand$$.className = 'brand';
+const h3Brand$$ = document.createElement('h3');
+const divFiltersBrand$$ = document.createElement('div');
+divFiltersBrand$$.className = 'brand_filter';
+h3Brand$$.textContent = 'Marcas';
+
+divContainerFilter$$.appendChild(cleanFiltersButton$$);
+divContainerFilter$$.appendChild(divBrand$$);
+divBrand$$.appendChild(h3Brand$$);
+divBrand$$.appendChild(divFiltersBrand$$);
+
+
+const createButtonSellers = () => {
+  const sellers = [];
+
+  for (const product of products) {
+    if (!sellers.includes(product.seller)) {
+      sellers.push(product.seller);
+    }
+  }
+
+  sellers.forEach((seller) => {
+    const seller$$ = document.createElement('button');
+    seller$$.textContent = seller;
+    seller$$.className = 'seller';
+    divFiltersBrand$$.appendChild(seller$$);
+    seller$$.addEventListener('click', filter);
+    cleanFiltersButton$$.addEventListener('click', filter);
+  });
+
+};
+
+const divSport$$ = document.createElement('div');
+const h3Sport$$ = document.createElement('h3');
+const divFilterSport$$ = document.createElement('div');
+divSport$$.className = 'sport_container';
+divFilterSport$$.className = 'sport_filter';
+divContainerFilter$$.appendChild(divSport$$);
+divSport$$.appendChild(h3Sport$$);
+divSport$$.appendChild(divFilterSport$$);
+h3Sport$$.textContent = 'Deporte';
+
+const createButtonSport = () => {
+  const sports = [];
+  for (const product of products) {
+    if (!sports.includes(product.sport)) {
+      sports.push(product.sport);
+    }
+  }
+  sports.forEach((sport) => {
+    const sport$$ = document.createElement('button');
+    sport$$.textContent = sport;
+    sport$$.className = 'sport';
+    divFilterSport$$.appendChild(sport$$);
+    sport$$.addEventListener('click', filter);
+  });
+};
+
+const divPrice$$ = document.createElement('div');
+const h3Price$$ = document.createElement('h3');
+const pPrecie$$ = document.createElement('p');
+const inputPrice$$ = document.createElement('input');
+divPrice$$.className = 'price';
+inputPrice$$.type = 'number';
+inputPrice$$.className = 'input_price';
+const inputPriceButton$$ = document.createElement('button');
+inputPriceButton$$.textContent = 'Buscar';
+inputPriceButton$$.className = 'search_button';
+//inputPrice$$.addEventListener('input', searchPrice);
+h3Price$$.textContent = 'Filtrar por precio';
+pPrecie$$.textContent = 'Introduce tu presupuesto máximo';
+
+divContainerFilter$$.appendChild(divPrice$$);
+divPrice$$.appendChild(h3Price$$);
+divPrice$$.appendChild(pPrecie$$);
+divPrice$$.appendChild(inputPrice$$);
+divPrice$$.appendChild(inputPriceButton$$);
+
+
+
+
+const filter = (e) => {
+  if (e.target.className === 'clean_button') {
+    drawProducts(products);
+  } else if (e.target.className === 'sport') {
+    const productsFiltered = products.filter((product) => product.sport.includes(e.target.textContent))
+    drawProducts(productsFiltered);
+  } else if (e.target.className === 'seller') {
+    const productsFiltered = products.filter((product) => product.seller.includes(e.target.textContent))
+    drawProducts(productsFiltered);
+  }
+};
+
+
+inputPriceButton$$.addEventListener('click', () => {
+  const budget = parseFloat(inputPrice$$.value);
+  if (isNaN(budget)) {
+    alert('Por favor, introduce un presupuesto válido');
+    return;
+  }
+  const productsFiltered = products.filter((product) => product.price <= budget)
+
+  if (productsFiltered.length === 0) {
+    alert('No hay productos disponibles dentro de tu presupuesto')
+  } else if (drawProducts(productsFiltered));
+});
+
+
+
+
+createButtonSellers();
+createButtonSport();
 drawProducts(products);
 
-//función buscar que va a recibir el evento
 
-const search = (e) => {
-  const productsFiltered = products.filter((product) =>
-    product.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
-  );
-
-  drawProducts(productsFiltered);
-};
 
 
 
